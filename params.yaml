@@ -1,0 +1,54 @@
+eq2:
+  point: 2
+  r_H: 0.41
+  r_C: 0.1
+  r_B: 0.01
+  alpha: 0.2
+  beta: 0.001
+  gamma: 0.6
+  g: 0.1
+  m_1: 0.8
+  m_2: 0.1
+  k: 1000000
+  k_B: 10
+  b_0: 3
+
+eq3:
+  point: 3
+  r_H: 0.20
+  r_C: 0.22
+  r_B: 0.21
+  alpha: 0.25
+  beta: 0.005
+  gamma: 0.5
+  g: 0.1
+  m_1: 0.8
+  m_2: 0.1
+  k: 10
+  k_B: 10
+  b_0: 6
+
+eq4:
+  point: 4
+  r_H: 0.17
+  r_C: 0.17
+  r_B: 0.2
+  alpha: 0.2124
+  beta: 0.005
+  gamma: 0.5
+  g: 0.1
+  m_1: 0.8
+  m_2: 0.1
+  k: 10
+  k_B: 10
+  b_0: 6
+
+initial:
+  H_nol : 0.1
+  C_nol : 0.35
+  B_nol : 0.1
+
+interval:
+  h  : 0.002
+  t0 : 0
+  th : 100
