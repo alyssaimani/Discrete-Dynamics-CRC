@@ -1,29 +1,30 @@
 import numpy as np
 from scipy.optimize import fsolve
+import math
+from dataclasses import dataclass
+from datatypes.loader import get_params
 
 # Define the equation to solve
-def equation(B_star, r_B, K_B, S, gamma, K, r_c, alpha, mu_2, g, B_0):
-    term1 = r_B * (1 - B_star / K_B) * S
-    sigmoid = 1 / (1 + np.exp(-g * (B_star - B_0)))
-    term2 = gamma * (K - (K / r_c) * (alpha - mu_2 * sigmoid))
-    return term1 + term2
+def equation(r_C, r_B, alpha, gamma, m_2, g, K, K_B, B_0, B_star):
+    C = K - K/r_C*(alpha - m_2*(1/(1+math.exp(-g*(B_star-B_0)))))
+    B_condition = r_B*(1-B_star/K_B) + gamma*C
+    return B_condition
 
 # Example parameter values (adjust as needed)
 params = {
-    "r_B": 1.0,
-    "K_B": 10.0,
-    "S": 1.0,
-    "gamma": 0.5,
-    "K": 5.0,
-    "r_c": 1.5,
+    "r_B": 1,
+    "r_C": 1.5,
     "alpha": 1.2,
-    "mu_2": 0.8,
+    "gamma": 0.5,
+    "m_2": 0.8,
     "g": 1.0,
-    "B_0": 2.0
+    "K": 5.0,
+    "K_B": 10,
+    "B_0": 2
 }
 
 # Solve for B*
-B_star_guess = 1.0  # initial guess
+B_star_guess = 0.001  # initial guess
 B_star_solution = fsolve(equation, B_star_guess, args=tuple(params.values()))
 
-print(f"Solution B* = {B_star_solution[0]:.4f}")
+print(f"Solution B* ≈ {B_star_solution[0]:.4f}")

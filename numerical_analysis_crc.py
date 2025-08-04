@@ -1,40 +1,5 @@
-from mathdyn import *
-import yaml
-from dataclasses import dataclass
-
-@dataclass
-class ParameterSet:
-    point: int
-    r_H: float
-    r_C: float
-    r_B: float
-    alpha: float
-    beta: float
-    gamma: float
-    g: float
-    m_1: float
-    m_2: float
-    k: float
-    k_B: float
-    b_0: float
-
-@dataclass
-class InitialSet:
-    H_nol: float
-    C_nol: float
-    B_nol: float
-
-@ dataclass
-class IntervalSet:
-    h : float
-    t0 : int
-    th : int 
-
-def get_params(param_path, equilibrium):
-    with open(param_path, "r") as f:
-        config = yaml.safe_load(f)
-    return ParameterSet(**config[equilibrium]), InitialSet(**config['initial']), IntervalSet(**config['interval'])
-
+from mathdyn.equations import *
+from datatypes.loader import get_params
 
 def main():
     params, initial, interval = get_params("params.yaml", "eq4")
